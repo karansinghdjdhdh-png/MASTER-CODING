@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master Coding - App Builder</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
+        body { background-color: #1e1e1e; color: #fff; display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
+        
+        /* Top Header */
+        header { display: flex; justify-content: space-between; align-items: center; background: #2d2d2d; padding: 10px 15px; border-bottom: 1px solid #444; }
+        .project-title { font-weight: bold; font-size: 18px; color: #4CAF50; }
+        .screen-manager { display: flex; gap: 8px; align-items: center; }
+        .screen-btn { background: #3c3c3c; border: 1px solid #555; color: #fff; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 13px; }
+        .screen-btn:hover { background: #505050; }
+        .top-tabs { display: flex; gap: 10px; }
+        .tab-btn { background: #4a90e2; border: none; color: #fff; padding: 6px 14px; border-radius: 4px; cursor: pointer; font-weight: bold; }
+
+        /* Main Workspace Layout */
+        .workspace { display: flex; flex: 1; height: calc(100vh - 50px); }
+
+        /* Left Palette (Tools) */
+        .palette-panel { width: 260px; background: #252526; border-right: 1px solid #333; display: flex; flex-direction: column; }
+        .palette-search { padding: 10px; background: #2d2d2d; border-bottom: 1px solid #333; }
+        .palette-search input { width: 100%; padding: 6px; background: #1e1e1e; border: 1px solid #444; color: #fff; border-radius: 4px; }
+        .tools-list { flex: 1; overflow-y: auto; padding: 5px; }
+        .tool-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 10px; margin-bottom: 4px; background: #2d2d2d; border-radius: 4px; cursor: pointer; font-size: 14px; }
+        .tool-item:hover { background: #383838; }
+        .tool-info { font-size: 12px; background: #444; padding: 2px 6px; border-radius: 50%; color: #ccc; }
+
+        /* Center Canvas */
+        .canvas-panel { flex: 1; background: #1e1e1e; display: flex; justify-content: center; align-items: center; position: relative; }
+        .mobile-frame { width: 320px; height: 560px; background: #fff; color: #000; border-radius: 24px; border: 8px solid #444; box-shadow: 0 0 20px rgba(0,0,0,0.5); display: flex; flex-direction: column; padding: 10px; position: relative; }
+        .mobile-screen-title { font-size: 14px; font-weight: bold; text-align: center; border-bottom: 1px solid #ddd; padding-bottom: 5px; margin-bottom: 10px; }
+
+        /* Right Properties Panel */
+        .properties-panel { width: 280px; background: #252526; border-left: 1px solid #333; display: flex; flex-direction: column; padding: 10px; overflow-y: auto; }
+        .prop-title { font-size: 15px; font-weight: bold; margin-bottom: 10px; color: #4CAF50; border-bottom: 1px solid #444; padding-bottom: 5px; }
+        .prop-group { margin-bottom: 10px; }
+        .prop-group label { display: block; font-size: 12px; color: #aaa; margin-bottom: 3px; }
+        .prop-group input, .prop-group select { width: 100%; padding: 6px; background: #1e1e1e; border: 1px solid #444; color: #fff; border-radius: 4px; font-size: 13px; }
+    </style>
+</head>
+<body>
+
+    <!-- Top Header -->
+    <header>
+        <div class="project-title">ToofanAI (Master Coding)</div>
+        <div class="screen-manager">
+            <button class="screen-btn">Screen1</button>
+            <button class="screen-btn">Add ⊕</button>
+            <button class="screen-btn">Copy ⊙</button>
+            <button class="screen-btn">Remove ⓧ</button>
+        </div>
+        <div class="top-tabs">
+            <button class="tab-btn">Designer</button>
+            <button class="tab-btn" style="background:#333;">Blocks</button>
+        </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <div class="workspace">
+        
+        <!-- Left Palette Panel -->
+        <div class="palette-panel">
+            <div class="palette-search">
+                <input type="text" placeholder="Search components...">
+            </div>
+            <div class="tools-list">
+                <div class="tool-item"><span>📦 Button</span><span class="tool-info">i</span></div>
+                <div class="tool-item"><span>☑ Checkbox</span><span class="tool-info">i</span></div>
+                <div class="tool-item"><span>🔄 Circular Progress</span><span class="tool-info">i</span></div>
+                <div class="tool-item"><span>📅 Date Picker</span><span class="tool-info">i</span></div>
+                <div class="tool-item"><span>➕ Floating Action Button</span><span class="tool-info">i</span></div>
+                <div class="tool-item"><span>🖼️ Image</span><span class="tool-info">i</span></div>
+                <div class="tool-item"><span>📝 Label</span><span class="tool-info">i</span></div>
+                <div class="tool-item"><span>🔔 Notifier</span><span class="tool-info">i</span></div>
+                <div class="tool-item"><span>🔘 Radio Button</span><span class="tool-info">i</span></div>
+                <div class="tool-item"><span>⭐ Rating Bar</span><span class="tool-info">i</span></div>
+                <div class="tool-item"><span>🎚️ Slider</span><span class="tool-info">i</span></div>
+                <div class="tool-item"><span>🔄 Spinner</span><span class="tool-info">i</span></div>
+                <div class="tool-item"><span>🔲 Switch</span><span class="tool-info">i</span></div>
+                <div class="tool-item"><span>⌨️ Text Box</span><span class="tool-info">i</span></div>
+            </div>
+        </div>
+
+        <!-- Center Canvas Panel -->
+        <div class="canvas-panel">
+            <div class="mobile-frame">
+                <div class="mobile-screen-title">Screen1</div>
+                <div style="flex:1; border: 2px dashed #ccc; border-radius: 8px; display: flex; justify-content: center; align-items: center; color: #888; font-size: 13px;">
+                    Drop components here
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Properties Panel -->
+        <div class="properties-panel">
+            <div class="prop-title">Screen1 Properties</div>
+            <div class="prop-group">
+                <label>About Screen</label>
+                <input type="text" value="">
+            </div>
+            <div class="prop-group">
+                <label>Background Color</label>
+                <input type="text" value="#FFFFFF">
+            </div>
+            <div class="prop-group">
+                <label>Align Horizontal</label>
+                <select><option>Left : 1</option><option>Center : 3</option><option>Right : 2</option></select>
+            </div>
+            <div class="prop-group">
+                <label>Align Vertical</label>
+                <select><option>Top : 1</option><option>Center : 3</option><option>Bottom : 2</option></select>
+            </div>
+            <div class="prop-group">
+                <label>Screen Orientation</label>
+                <select><option>Unspecified</option><option>Portrait</option><option>Landscape</option></select>
+            </div>
+            <div class="prop-group">
+                <label>Title</label>
+                <input type="text" value="Screen1">
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
